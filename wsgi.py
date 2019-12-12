@@ -8,8 +8,8 @@ import json
 import redis
 import bottle
 import logging
-import urllib2
-import urlparse
+import urllib.request, urllib.error, urllib.parse
+import urllib.parse
 import contextlib
 
 from bottle import route
@@ -56,12 +56,12 @@ def get_upstream_rate(src, dst):
     url = ("%s/calculator.php?original=%s&target=%s&value=1.0") % (SERVICE_URL,
                                                                    src, dst)
     try:
-        with contextlib.closing(urllib2.urlopen(url)) as stream:
-            result = stream.read()
-    except urllib2.URLError:
+        with contextlib.closing(urllib.request.urlopen(url)) as stream:
+            result = stream.read().decode()
+    except urllib.error.URLError:
         log.exception("url error")
         raise ConnectionError("Can't connect upstream server")
-    except urllib2.HTTPError:
+    except urllib.error.HTTPError:
         log.exception("http error")
         raise ConnectionError("Can't communicate upstream server")
 
