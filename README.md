@@ -1,4 +1,6 @@
-# Currency Converter
+# Currency Converter [BROKEN]
+
+The currency exchange data services for this app are no longer available. The app runs, but does not provide exchange rates.
 
 ## Purpose
 
